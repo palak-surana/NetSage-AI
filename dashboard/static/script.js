@@ -1,5 +1,5 @@
 // =========================================================
-// NETSAGE AI DASHBOARD
+// NETSAGE AI DASHBOARD V2
 // =========================================================
 
 
@@ -11,35 +11,22 @@ async function loadStats() {
 
     try {
 
-        const response =
-            await fetch("/api/stats");
+        const response = await fetch("/api/stats");
+        const data = await response.json();
 
-        const data =
-            await response.json();
-
-        document.getElementById(
-            "totalCases"
-        ).textContent =
+        document.getElementById("totalCases").textContent =
             data.total_cases;
 
-        document.getElementById(
-            "totalFindings"
-        ).textContent =
+        document.getElementById("totalFindings").textContent =
             data.total_findings;
 
-        document.getElementById(
-            "casesWithFindings"
-        ).textContent =
+        document.getElementById("casesWithFindings").textContent =
             data.cases_with_findings;
 
-        document.getElementById(
-            "casesWithoutFindings"
-        ).textContent =
+        document.getElementById("casesWithoutFindings").textContent =
             data.cases_without_findings;
 
-    }
-
-    catch (error) {
+    } catch (error) {
 
         console.error(
             "Failed to load statistics:",
@@ -58,23 +45,16 @@ async function loadCases() {
 
     try {
 
-        const response =
-            await fetch("/api/cases");
-
-        const cases =
-            await response.json();
+        const response = await fetch("/api/cases");
+        const cases = await response.json();
 
         const select =
-            document.getElementById(
-                "caseSelect"
-            );
+            document.getElementById("caseSelect");
 
         cases.forEach(caseData => {
 
             const option =
-                document.createElement(
-                    "option"
-                );
+                document.createElement("option");
 
             option.value =
                 caseData.case_id;
@@ -85,15 +65,11 @@ async function loadCases() {
                 caseData.finding_count +
                 " finding(s))";
 
-            select.appendChild(
-                option
-            );
+            select.appendChild(option);
 
         });
 
-    }
-
-    catch (error) {
+    } catch (error) {
 
         console.error(
             "Failed to load cases:",
@@ -111,15 +87,15 @@ async function loadCases() {
 async function analyzeCase() {
 
     const caseId =
-        document.getElementById(
-            "caseSelect"
-        ).value;
+        document.getElementById("caseSelect").value;
 
     const result =
-        document.getElementById(
-            "result"
-        );
+        document.getElementById("result");
 
+
+    // -----------------------------------------------------
+    // CASE NOT SELECTED
+    // -----------------------------------------------------
 
     if (!caseId) {
 
@@ -137,14 +113,16 @@ async function analyzeCase() {
     }
 
 
-    // Loading state
+    // -----------------------------------------------------
+    // LOADING
+    // -----------------------------------------------------
 
     result.innerHTML = `
 
-        <h2>Diagnosis - ${caseId}</h2>
+        <h2>🧠 AI Diagnosis - ${caseId}</h2>
 
         <p class="empty">
-            🧠 NetSage AI is analyzing the case...
+            NetSage AI is analyzing the network evidence...
         </p>
 
     `;
@@ -154,7 +132,8 @@ async function analyzeCase() {
 
         const response =
             await fetch(
-                "/api/cases/" + caseId
+                "/api/cases/" +
+                encodeURIComponent(caseId)
             );
 
         const data =
@@ -171,9 +150,9 @@ async function analyzeCase() {
         }
 
 
-        // =================================================
-        // NO FINDING
-        // =================================================
+        // -------------------------------------------------
+        // NO FINDINGS
+        // -------------------------------------------------
 
         if (
             !data.diagnoses ||
@@ -205,24 +184,28 @@ async function analyzeCase() {
         }
 
 
-        // =================================================
-        // BUILD AI DIAGNOSIS
-        // =================================================
+        // -------------------------------------------------
+        // HEADER
+        // -------------------------------------------------
 
         let html = `
 
             <h2>
-                🧠 AI Diagnosis - ${data.case_id}
+                🧠 AI Diagnosis V2 - ${data.case_id}
             </h2>
 
             <p class="ai-status">
                 NetSage AI analyzed
-                ${data.diagnoses.length}
+                <strong>${data.diagnoses.length}</strong>
                 finding(s).
             </p>
 
         `;
 
+
+        // -------------------------------------------------
+        // EACH DIAGNOSIS
+        // -------------------------------------------------
 
         data.diagnoses.forEach(
             (diagnosis, index) => {
@@ -252,6 +235,8 @@ async function analyzeCase() {
                         </div>
 
 
+                        <!-- PROBLEM -->
+
                         <div class="diagnosis-section">
 
                             <h4>
@@ -265,10 +250,27 @@ async function analyzeCase() {
                         </div>
 
 
+                        <!-- ROOT CAUSE -->
+
                         <div class="diagnosis-section">
 
                             <h4>
-                                💡 Why this happened
+                                🎯 Root Cause
+                            </h4>
+
+                            <p>
+                                ${diagnosis.root_cause}
+                            </p>
+
+                        </div>
+
+
+                        <!-- EXPLANATION -->
+
+                        <div class="diagnosis-section">
+
+                            <h4>
+                                💡 Explanation
                             </h4>
 
                             <p>
@@ -277,6 +279,8 @@ async function analyzeCase() {
 
                         </div>
 
+
+                        <!-- RECOMMENDED FIX -->
 
                         <div class="diagnosis-section fix">
 
@@ -290,6 +294,23 @@ async function analyzeCase() {
 
                         </div>
 
+
+                        <!-- EVIDENCE -->
+
+                        <div class="diagnosis-section">
+
+                            <h4>
+                                📋 Evidence
+                            </h4>
+
+                            <p>
+                                ${diagnosis.evidence}
+                            </p>
+
+                        </div>
+
+
+                        <!-- CONFIDENCE -->
 
                         <div class="confidence">
 
@@ -313,11 +334,13 @@ async function analyzeCase() {
 
         result.innerHTML = html;
 
-    }
 
-    catch (error) {
+    } catch (error) {
 
-        console.error(error);
+        console.error(
+            "Diagnosis error:",
+            error
+        );
 
         result.innerHTML = `
 
@@ -344,5 +367,4 @@ async function analyzeCase() {
 // =========================================================
 
 loadStats();
-
 loadCases();
