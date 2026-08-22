@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>NetSage AI</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header>
+
+            <h1>NetSage AI</h1>
+
+            <p>
+                Intelligent Network Troubleshooting System
+            </p>
+
+        </header>
+
+
+        <!-- STATISTICS -->
+
+        <section class="stats">
+
+            <div class="card">
+                <h3>Total Cases</h3>
+                <p id="totalCases">-</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Findings</h3>
+                <p id="totalFindings">-</p>
+            </div>
+
+            <div class="card">
+                <h3>Cases With Faults</h3>
+                <p id="casesWithFindings">-</p>
+            </div>
+
+            <div class="card">
+                <h3>No Fault</h3>
+                <p id="casesWithoutFindings">-</p>
+            </div>
+
+        </section>
+
+
+        <!-- CASE SELECTOR -->
+
+        <section class="panel">
+
+            <h2>Network Case Analysis</h2>
+
+            <div class="controls">
+
+                <select id="caseSelect">
+
+                    <option value="">
+                        Select a case
+                    </option>
+
+                </select>
+
+                <button onclick="analyzeCase()">
+                    Analyze
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- RESULT -->
+
+        <section
+            id="result"
+            class="panel result-panel"
+        >
+
+            <h2>Diagnosis</h2>
+
+            <p class="empty">
+                Select a case to view diagnosis.
+            </p>
+
+        </section>
+
+    </div>
+
+
+    <script
+        src="{{ url_for('static', filename='script.js') }}"
+    ></script>
+
+</body>
+
+</html>
