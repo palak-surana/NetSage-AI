@@ -1,0 +1,362 @@
+[
+    {
+        "case_id": "CASE001",
+        "findings": [
+            {
+                "rule": "VLAN Configuration",
+                "status": "FAIL",
+                "message": "Incorrect switchport VLAN assignment: actual VLAN 1; expected VLAN 10.",
+                "evidence": "Port is listed under VLAN 1; should be in VLAN 10."
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE002",
+        "findings": [
+            {
+                "rule": "Gateway",
+                "status": "FAIL",
+                "message": "Incorrect default gateway: configured 192.168.1.1; expected 192.168.10.1.",
+                "evidence": "Configured gateway: 192.168.1.1; Expected gateway: 192.168.10.1"
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE003",
+        "findings": [
+            {
+                "rule": "DHCP",
+                "status": "FAIL",
+                "message": "DHCP pool is exhausted.",
+                "evidence": "No DHCP addresses available."
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE004",
+        "findings": [
+            {
+                "rule": "DNS",
+                "status": "FAIL",
+                "message": "DNS resolution request timed out.",
+                "evidence": "nslookup timeout."
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE005",
+        "findings": [
+            {
+                "rule": "VLAN/Trunk",
+                "status": "FAIL",
+                "message": "VLAN 30 is missing from the trunk allowed list.",
+                "evidence": "Allowed VLANs: 10,20; Required VLAN: 30"
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE006",
+        "findings": [
+            {
+                "rule": "Routing",
+                "status": "FAIL",
+                "message": "Possible missing or incorrect route detected.",
+                "evidence": "no route"
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE007",
+        "findings": [
+            {
+                "rule": "ACL",
+                "status": "FAIL",
+                "message": "ACL rule is blocking or incorrectly allowing traffic.",
+                "evidence": "deny tcp"
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE008",
+        "findings": [
+            {
+                "rule": "NAT",
+                "status": "FAIL",
+                "message": "NAT configuration problem detected.",
+                "evidence": "no ip nat inside"
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE009",
+        "findings": [
+            {
+                "rule": "DHCP",
+                "status": "FAIL",
+                "message": "DHCP pool is exhausted.",
+                "evidence": "No DHCP addresses available."
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE010",
+        "findings": [
+            {
+                "rule": "Wireless",
+                "status": "FAIL",
+                "message": "Incorrect wireless security key detected.",
+                "evidence": "authentication failed with different key"
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE011",
+        "findings": [
+            {
+                "rule": "Interface Status",
+                "status": "FAIL",
+                "message": "Interface problem detected: 'administratively down'",
+                "evidence": "administratively down"
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE012",
+        "findings": [
+            {
+                "rule": "Physical Link",
+                "status": "FAIL",
+                "message": "Physical link or cabling problem detected.",
+                "evidence": "damaged cable"
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE013",
+        "findings": [
+            {
+                "rule": "VLAN Configuration",
+                "status": "FAIL",
+                "message": "Required VLAN 40 is missing or not created.",
+                "evidence": "vlan 40 cannot communicate though ports are assigned correctly sw1 should have vlan 40 created show vlan brief: vlan 40 is not present"
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE014",
+        "findings": [
+            {
+                "rule": "Subnet Mask",
+                "status": "FAIL",
+                "message": "Wrong subnet mask: 255.255.0.0; expected 255.255.255.0",
+                "evidence": "subnet mask 255.255.0.0; expected 255.255.255.0"
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE015",
+        "findings": [
+            {
+                "rule": "Routing",
+                "status": "FAIL",
+                "message": "Incorrect static-route next hop: configured 172.16.1.9; actual next hop 172.16.1.2.",
+                "evidence": "via 172.16.1.9; actual r2 next hop is 172.16.1.2"
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE016",
+        "findings": [
+            {
+                "rule": "ACL",
+                "status": "FAIL",
+                "message": "ACL rule is blocking or incorrectly allowing traffic.",
+                "evidence": "deny ip"
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE017",
+        "findings": [
+            {
+                "rule": "NAT",
+                "status": "FAIL",
+                "message": "NAT configuration problem detected.",
+                "evidence": "no ip nat outside"
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE018",
+        "findings": [
+            {
+                "rule": "Duplicate IP",
+                "status": "FAIL",
+                "message": "IP conflict indicated by network evidence.",
+                "evidence": "Explicit IP conflict evidence."
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE019",
+        "findings": [
+            {
+                "rule": "Gateway",
+                "status": "FAIL",
+                "message": "Default gateway is not configured.",
+                "evidence": "default gateway: blank"
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE020",
+        "findings": [
+            {
+                "rule": "DNS",
+                "status": "FAIL",
+                "message": "Wrong DNS server address: configured 8.8.8.8; expected 10.0.0.53.",
+                "evidence": "DNS server mismatch."
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE021",
+        "findings": [
+            {
+                "rule": "VLAN/802.1Q",
+                "status": "FAIL",
+                "message": "Wrong 802.1Q VLAN ID: 200; expected 20.",
+                "evidence": "encapsulation dot1q 200; expected vlan id is 20"
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE022",
+        "findings": [
+            {
+                "rule": "Native VLAN",
+                "status": "FAIL",
+                "message": "Native VLAN mismatch detected between trunk endpoints.",
+                "evidence": "Native VLAN mismatch."
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE023",
+        "findings": [
+            {
+                "rule": "DHCP",
+                "status": "FAIL",
+                "message": "Wrong DHCP default-router: configured 192.168.80.254; actual gateway 192.168.80.1.",
+                "evidence": "default-router 192.168.80.254; actual gateway is 192.168.80.1"
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE024",
+        "findings": [
+            {
+                "rule": "Routing",
+                "status": "FAIL",
+                "message": "Possible missing or incorrect route detected.",
+                "evidence": "network unreachable"
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE025",
+        "findings": [
+            {
+                "rule": "ACL",
+                "status": "FAIL",
+                "message": "Guest isolation ACL is missing or incorrectly configured.",
+                "evidence": "No deny rule exists for guest VLAN 50."
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE026",
+        "findings": [
+            {
+                "rule": "NAT",
+                "status": "FAIL",
+                "message": "NAT configuration problem detected.",
+                "evidence": "no static nat"
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE027",
+        "findings": [
+            {
+                "rule": "Speed/Duplex",
+                "status": "FAIL",
+                "message": "Speed or duplex configuration mismatch detected: configured 10Mb/s half; expected 100Mb/s full.",
+                "evidence": "Configured: 10Mb/s half; Expected: 100Mb/s full"
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE028",
+        "findings": [
+            {
+                "rule": "ACL",
+                "status": "FAIL",
+                "message": "ACL rule is blocking or incorrectly allowing traffic.",
+                "evidence": "deny udp"
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE029",
+        "findings": [
+            {
+                "rule": "Wireless",
+                "status": "FAIL",
+                "message": "Wireless channel interference detected.",
+                "evidence": "AP1 and AP2 use the same channel with high interference."
+            }
+        ],
+        "finding_count": 1
+    },
+    {
+        "case_id": "CASE030",
+        "findings": [
+            {
+                "rule": "VLAN/Trunk",
+                "status": "FAIL",
+                "message": "VLAN 50 is missing from the trunk allowed list.",
+                "evidence": "Allowed VLANs: 10,20,30; Required VLAN: 50"
+            }
+        ],
+        "finding_count": 1
+    }
+]
