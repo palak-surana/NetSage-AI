@@ -132,6 +132,31 @@ def format_value(value):
     return str(value)
 
 
+def get_packet_tracer_evidence(case_id):
+    """
+    Verified Packet Tracer evidence currently mapped to CASE001.
+
+    CASE001 was checked manually in netsage_network.pkt:
+    Switch0 Fa0/2 is the PC0 access port and is currently in VLAN 1.
+    The expected VLAN for the case is VLAN 10.
+    """
+    evidence_map = {
+        "CASE001": {
+            "device": "Switch0",
+            "interface": "FastEthernet0/2",
+            "connection": "PC0 ↔ Switch0",
+            "switchport_mode": "Static access",
+            "current_vlan": "1",
+            "expected_vlan": "10",
+            "status": "MISMATCH DETECTED",
+            "command": "show interfaces fa0/2 switchport",
+            "source_file": "packet_tracer/netsage_network.pkt",
+        }
+    }
+
+    return evidence_map.get(str(case_id).upper())
+
+
 def finding_summary(finding):
     if isinstance(finding, dict):
         rule = first_value(finding, "rule", "category", "type", default="Network Finding")
@@ -1019,6 +1044,99 @@ elif page == "Diagnose Case":
                 )
 
             # ----------------------------------------------------
+            # PACKET TRACER EVIDENCE
+            # ----------------------------------------------------
+
+            packet_evidence = get_packet_tracer_evidence(selected_case)
+
+            st.markdown(
+                """
+                <div class="page-head" style="margin-top:28px;">
+                    <h1>📡 Packet Tracer Evidence</h1>
+                    <p>
+                        Network configuration evidence linked to the selected
+                        Cisco Packet Tracer case.
+                    </p>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+            if packet_evidence:
+                e1, e2, e3, e4 = st.columns(4)
+
+                evidence_items = [
+                    ("Device", packet_evidence["device"]),
+                    ("Interface", packet_evidence["interface"]),
+                    ("Mode", packet_evidence["switchport_mode"]),
+                    ("Current VLAN", packet_evidence["current_vlan"]),
+                ]
+
+                for column, (label, value) in zip(
+                    [e1, e2, e3, e4],
+                    evidence_items,
+                ):
+                    with column:
+                        st.markdown(
+                            f"""
+                            <div class="metric-card" style="min-height:112px;">
+                                <div class="metric-top">{escape(label.upper())}</div>
+                                <div style="
+                                    margin-top:8px;
+                                    font-size:20px;
+                                    font-weight:900;
+                                    color:#172033;
+                                ">
+                                    {escape(value)}
+                                </div>
+                            </div>
+                            """,
+                            unsafe_allow_html=True,
+                        )
+
+                st.markdown(
+                    f"""
+                    <div class="alert alert-fault" style="margin-top:16px;">
+                        <div class="alert-title">
+                            🔴 {escape(packet_evidence["status"])}
+                        </div>
+                        <div class="alert-text">
+                            Current VLAN <b>{escape(packet_evidence["current_vlan"])}</b>
+                            does not match expected VLAN
+                            <b>{escape(packet_evidence["expected_vlan"])}</b>
+                            for this case.
+                        </div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+
+                with st.expander("🔎 View Packet Tracer verification details"):
+                    st.markdown(
+                        f"""
+                        **Source:** `{escape(packet_evidence["source_file"])}`
+
+                        **Connection:** {escape(packet_evidence["connection"])}
+
+                        **CLI command used:** `{escape(packet_evidence["command"])}`
+
+                        **Current VLAN:** `{escape(packet_evidence["current_vlan"])}`
+
+                        **Expected VLAN:** `{escape(packet_evidence["expected_vlan"])}`
+                        """
+                    )
+
+                    st.info(
+                        "This evidence was verified manually in Cisco Packet Tracer "
+                        "from the Switch0 CLI configuration."
+                    )
+            else:
+                st.info(
+                    "Packet Tracer evidence is not mapped for this case yet. "
+                    "The rule-checker evidence and AI diagnosis are still available."
+                )
+
+            # ----------------------------------------------------
             # FINDINGS
             # ----------------------------------------------------
 
@@ -1313,56 +1431,98 @@ elif page == "About":
         """
         <div class="page-head">
             <h1>ℹ️ About NetSage AI</h1>
-            <p>Intelligent network troubleshooting with deterministic checks and AI assistance.</p>
-        </div>
-
-        <div class="panel">
-            <div class="panel-title">🧠 What is NetSage AI?</div>
-            <div class="panel-subtitle">
-                NetSage AI is a network troubleshooting platform designed to
-                analyze network evidence, detect configuration problems and
-                explain likely root causes.
-            </div>
-
-            <div class="panel-title" style="margin-top:25px;">
-                🔄 Diagnosis Pipeline
-            </div>
-
-            <div style="margin-top:15px;line-height:2;font-weight:800;">
-                📡 Network Evidence
-                &nbsp; → &nbsp;
-                🔍 Rule-Based Checker
-                &nbsp; → &nbsp;
-                🤖 AI Diagnosis
-                &nbsp; → &nbsp;
-                🎯 Root Cause
-                &nbsp; → &nbsp;
-                🛠️ Resolution
-            </div>
-        </div>
-
-        <div class="panel">
-            <div class="panel-title">🚀 Core Features</div>
-            <div class="panel-subtitle">
-                • Network case analysis<br>
-                • Rule-based fault detection<br>
-                • AI-assisted diagnosis<br>
-                • Evidence inspection<br>
-                • Case explorer<br>
-                • Troubleshooting workflow<br>
-                • Interactive Streamlit dashboard
-            </div>
-        </div>
-
-        <div class="panel">
-            <div class="panel-title">⚙️ Technology</div>
-            <div class="panel-subtitle">
-                Python · Streamlit · Flask · JSON · Network Rule Engine · AI Diagnosis Engine
-            </div>
+            <p>
+                Intelligent network troubleshooting with deterministic checks
+                and AI assistance.
+            </p>
         </div>
         """,
         unsafe_allow_html=True,
     )
+
+    st.markdown("### 🧠 What is NetSage AI?")
+
+    st.write(
+        "NetSage AI is a network troubleshooting platform designed to "
+        "analyze network evidence, detect configuration problems and "
+        "explain likely root causes."
+    )
+
+    st.markdown("### 🔄 Diagnosis Pipeline")
+
+    p1, p2, p3, p4, p5 = st.columns(5)
+
+    pipeline = [
+        ("📡", "Network Evidence"),
+        ("🔍", "Rule-Based Checker"),
+        ("🤖", "AI Diagnosis"),
+        ("🎯", "Root Cause"),
+        ("🛠️", "Resolution"),
+    ]
+
+    for col, (icon, label) in zip([p1, p2, p3, p4, p5], pipeline):
+        with col:
+            st.markdown(
+                f"""
+                <div class="panel" style="
+                    margin-top:10px;
+                    min-height:120px;
+                    text-align:center;
+                ">
+                    <div style="font-size:26px;">{icon}</div>
+                    <div style="
+                        margin-top:8px;
+                        font-weight:800;
+                        font-size:13px;
+                    ">
+                        {label}
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+    st.markdown("### 🚀 Core Features")
+
+    f1, f2 = st.columns(2)
+
+    with f1:
+        st.markdown(
+            """
+            <div class="panel" style="margin-top:10px;">
+                <div style="line-height:2;">
+                    ✓ Network case analysis<br>
+                    ✓ Rule-based fault detection<br>
+                    ✓ AI-assisted diagnosis<br>
+                    ✓ Evidence inspection
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    with f2:
+        st.markdown(
+            """
+            <div class="panel" style="margin-top:10px;">
+                <div style="line-height:2;">
+                    ✓ Case explorer<br>
+                    ✓ Troubleshooting workflow<br>
+                    ✓ Interactive Streamlit dashboard<br>
+                    ✓ Recommended resolution
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    st.markdown("### ⚙️ Technology")
+
+    st.info(
+        "Python · Streamlit · Flask · JSON · Network Rule Engine · "
+        "AI Diagnosis Engine"
+    )
+
 
 
 # ============================================================
