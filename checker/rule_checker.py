@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 # =========================================================
-# NETSAGE AI - RULE CHECKER V6
+# NETSAGE AI - RULE CHECKER V7
 # Evidence-Based Deterministic Network Troubleshooting
 # =========================================================
 
@@ -1368,7 +1368,7 @@ def run_rules(case):
 def process_csv(filename):
 
     print("\n==========================================")
-    print("         NETSAGE AI RULE CHECKER V6")
+    print("         NETSAGE AI RULE CHECKER V7")
     print("==========================================\n")
 
     if not filename.exists():
@@ -1402,8 +1402,15 @@ def process_csv(filename):
 
             findings = run_rules(case)
 
+            # Case-level status is separate from individual finding status.
+            # FAIL means a deterministic network fault was detected.
+            # PASS means no deterministic fault was detected.
+            case_status = "FAIL" if findings else "PASS"
+
             results.append({
                 "case_id": case_id,
+                "status": case_status,
+                "fault_detected": bool(findings),
                 "findings": findings,
                 "finding_count": len(findings)
             })
@@ -1428,6 +1435,19 @@ def process_csv(filename):
                     "✅ No deterministic fault detected."
                 )
 
+    cases_with_findings = sum(
+        1
+        for result in results
+        if result["finding_count"] > 0
+    )
+
+    cases_without_findings = (
+        total_cases - cases_with_findings
+    )
+
+    fault_cases = cases_with_findings
+    passed_cases = cases_without_findings
+
     with open(
         RESULT_FILE,
         "w",
@@ -1440,16 +1460,6 @@ def process_csv(filename):
             indent=4,
             ensure_ascii=False
         )
-
-    cases_with_findings = sum(
-        1
-        for result in results
-        if result["finding_count"] > 0
-    )
-
-    cases_without_findings = (
-        total_cases - cases_with_findings
-    )
 
     print("\n==========================================")
     print("SUMMARY")
@@ -1471,10 +1481,18 @@ def process_csv(filename):
         f"Cases with no finding: {cases_without_findings}"
     )
 
+    print(
+        f"Fault detected      : {fault_cases}"
+    )
+
+    print(
+        f"Passed              : {passed_cases}"
+    )
+
     print("\nResults saved to:")
     print(RESULT_FILE)
 
-    print("\nRule Checker V6 completed.")
+    print("\nRule Checker V7 completed.")
 
 
 # =========================================================

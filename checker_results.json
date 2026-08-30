@@ -1,6 +1,8 @@
 [
     {
         "case_id": "CASE001",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "VLAN Configuration",
@@ -13,6 +15,8 @@
     },
     {
         "case_id": "CASE002",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "Gateway",
@@ -25,6 +29,8 @@
     },
     {
         "case_id": "CASE003",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "DHCP",
@@ -37,6 +43,8 @@
     },
     {
         "case_id": "CASE004",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "DNS",
@@ -49,6 +57,8 @@
     },
     {
         "case_id": "CASE005",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "VLAN/Trunk",
@@ -61,6 +71,8 @@
     },
     {
         "case_id": "CASE006",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "Routing",
@@ -73,6 +85,8 @@
     },
     {
         "case_id": "CASE007",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "ACL",
@@ -85,6 +99,8 @@
     },
     {
         "case_id": "CASE008",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "NAT",
@@ -97,6 +113,8 @@
     },
     {
         "case_id": "CASE009",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "DHCP",
@@ -109,6 +127,8 @@
     },
     {
         "case_id": "CASE010",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "Wireless",
@@ -121,6 +141,8 @@
     },
     {
         "case_id": "CASE011",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "Interface Status",
@@ -133,6 +155,8 @@
     },
     {
         "case_id": "CASE012",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "Physical Link",
@@ -145,6 +169,8 @@
     },
     {
         "case_id": "CASE013",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "VLAN Configuration",
@@ -157,6 +183,8 @@
     },
     {
         "case_id": "CASE014",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "Subnet Mask",
@@ -169,6 +197,8 @@
     },
     {
         "case_id": "CASE015",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "Routing",
@@ -181,6 +211,8 @@
     },
     {
         "case_id": "CASE016",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "ACL",
@@ -193,6 +225,8 @@
     },
     {
         "case_id": "CASE017",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "NAT",
@@ -205,6 +239,8 @@
     },
     {
         "case_id": "CASE018",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "Duplicate IP",
@@ -217,6 +253,8 @@
     },
     {
         "case_id": "CASE019",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "Gateway",
@@ -229,6 +267,8 @@
     },
     {
         "case_id": "CASE020",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "DNS",
@@ -241,6 +281,8 @@
     },
     {
         "case_id": "CASE021",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "VLAN/802.1Q",
@@ -253,6 +295,8 @@
     },
     {
         "case_id": "CASE022",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "Native VLAN",
@@ -265,6 +309,8 @@
     },
     {
         "case_id": "CASE023",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "DHCP",
@@ -277,6 +323,8 @@
     },
     {
         "case_id": "CASE024",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "Routing",
@@ -289,6 +337,8 @@
     },
     {
         "case_id": "CASE025",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "ACL",
@@ -301,6 +351,8 @@
     },
     {
         "case_id": "CASE026",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "NAT",
@@ -313,6 +365,8 @@
     },
     {
         "case_id": "CASE027",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "Speed/Duplex",
@@ -325,6 +379,8 @@
     },
     {
         "case_id": "CASE028",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "ACL",
@@ -337,6 +393,8 @@
     },
     {
         "case_id": "CASE029",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "Wireless",
@@ -349,6 +407,8 @@
     },
     {
         "case_id": "CASE030",
+        "status": "FAIL",
+        "fault_detected": true,
         "findings": [
             {
                 "rule": "VLAN/Trunk",
